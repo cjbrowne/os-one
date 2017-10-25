@@ -4,5 +4,5 @@ pushd src
 make clean
 make
 popd
-./update_image.sh
+./install_kernel.sh
 ./run_bochs.sh
