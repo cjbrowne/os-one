@@ -38,7 +38,7 @@ p3_table:
 p2_table:
 	resb 4096
 stack_bottom:
-	resb 64
+	resb 4096 * 4
 stack_top:
 
 section .rodata
@@ -65,11 +65,7 @@ start:
 
 
 	jmp gdt64.code:main
-	; print OK to let us know the boot so far was successful
-	mov dword [0xb8000], 0x2f4b2f4f
 
-	cli
-	call main
 	jmp infinite_loop
 
 
