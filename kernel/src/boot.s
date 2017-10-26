@@ -41,6 +41,15 @@ stack_bottom:
 	resb 64
 stack_top:
 
+section .rodata
+gdt64:
+	dq 0 ; zero entry
+.code: equ $ - gdt64
+	dq (1<<43) | (1<<44) | (1<<47) | (1<<53) ; code segment
+.pointer:
+	dw $ - gdt64 - 1
+	dq gdt64
+
 section .text
 start:
 	mov esp, stack_top
@@ -52,12 +61,19 @@ start:
 	call set_up_page_tables
 	call enable_paging
 
+	lgdt [gdt64.pointer]
+
+
+	jmp gdt64.code:main
 	; print OK to let us know the boot so far was successful
 	mov dword [0xb8000], 0x2f4b2f4f
 
 	cli
 	call main
 	jmp infinite_loop
+
+
+
 ; simply prints the message 'error', followed by the error code in AL
 error:
 	mov dword [0xb8000], 0x4f524f45
