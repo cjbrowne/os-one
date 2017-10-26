@@ -1,9 +1,11 @@
-megs: 32
-romimage: file=/usr/share/bochs/BIOS-bochs-latest, address=0xe0000
-vgaromimage: file= /usr/share/bochs/VGABIOS-elpin-2.40
-floppya: 1_44=/dev/loop0, status=inserted
-boot: a
+display_library: sdl
+megs: 512
+romimage: file=/usr/local/share/bochs/BIOS-bochs-latest, address=0xfffe0000
+vgaromimage: file= /usr/local/share/bochs/VGABIOS-elpin-2.40
+ata0: enabled=1, ioaddr1=0x1f0, ioaddr2=0x3f0, irq=14
+ata0-slave: type=cdrom, path=osone.iso, status=inserted
+boot: cdrom
 log: bochsout.txt
 mouse: enabled=0
-clock: sync=realtime
-cpu: ips=5000000
+clock: sync=none, time0=local
+cpuid: level=6, x86_64=1

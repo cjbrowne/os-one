@@ -1,8 +1,6 @@
 #!/bin/bash
 
-pushd src
-make clean
-make
-popd
-./install_kernel.sh
+make -C src clean
+make -C src
+./prepare_iso.sh
 ./run_bochs.sh
