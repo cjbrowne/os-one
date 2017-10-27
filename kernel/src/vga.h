@@ -5,6 +5,7 @@
 void vga_putc(char c);
 void vga_clear_screen(void);
 void vga_print(char* str);
+void vga_print_dec(unsigned long dec);
 
 // VGA literals
 #define VGA_COLOR_BLACK 0

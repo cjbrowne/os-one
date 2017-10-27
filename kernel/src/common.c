@@ -19,3 +19,10 @@ u16int inw(u16int port)
 	return ret;
 }
 
+void memset(u8int* dest, u8int val, u32int len)
+{
+	while(len-- > 0)
+	{
+		dest[len] = val;	
+	}
+}

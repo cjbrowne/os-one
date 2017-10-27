@@ -113,3 +113,12 @@ void vga_print(char* str)
 		vga_putc(str[i++]);	
 	}
 }
+
+void vga_print_dec(unsigned long dec)
+{
+	vga_putc('0' + (dec % 10));
+	if(dec > 10)
+	{
+		vga_print_dec(dec / 10);	
+	}
+}

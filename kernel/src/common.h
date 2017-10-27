@@ -15,4 +15,6 @@ void outb(unsigned short port, unsigned char value);
 unsigned char inb(unsigned short port);
 unsigned short inw(unsigned short port);
 
+void memset(u8int* dest, u8int val, u32int len);
+
 #endif

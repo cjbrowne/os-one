@@ -1,5 +1,6 @@
 #include "vga.h"
 #include "util.h"
+#include "idt.h"
 
 #define VERSION "0.01"
 
@@ -47,13 +48,11 @@ void reset_cpu(void)
 
 void print_mem_info(void)
 {
-	register int ebx = asm("ebx");
+	register int ebx asm ("ebx");
 	struct meminfo* meminfo_ptr;
-	meminfo = (struct meminfo*) ebx;
+	meminfo_ptr = (struct meminfo*) ebx;
 	vga_print("memory start:");
-	vga_print(to_hex_str(meminfo->mmap_addr));
 	vga_print("memory length:");
-	vga_print(to_hex_str(meminfo->mmap_length));
 }
 
 int main(struct multiboot *mboot_ptr)
@@ -63,6 +62,9 @@ int main(struct multiboot *mboot_ptr)
 	vga_print("OS One version");
 	vga_print(VERSION);
 	vga_print("\n");
+	init_descriptor_tables();
+	asm volatile("int $0x3");
+	asm volatile("int $0x4");
 	for(;;);
 	return 0x1337C0DE;
 }

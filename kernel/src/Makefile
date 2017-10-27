@@ -1,4 +1,4 @@
-SOURCES=boot.o main.o common.o vga.o
+SOURCES=boot.o main.o common.o vga.o isr.o idt.o util.o idt_asm.o
 CFLAGS=-nostdlib -nostdinc -fno-builtin -fno-stack-protector -m64
 LDFLAGS=-Tlink.ld -n
 ASFLAGS=-f elf64
